@@ -1,0 +1,15 @@
+import yfinance as yf
+
+# Example for AVGO
+stock = "AVGO"
+option = yf.Ticker(stock)
+options_data = option.option_chain('2025-01-03')  # Example expiration date
+calls = options_data.calls
+
+K = 185
+specific_call = calls[calls['strike'] == K]
+iv = specific_call['impliedVolatility'].iloc[0]  # Extract the first value
+print(f"Implied Volatility for strike {K}: {iv}")
+
+# Display Implied Volatility (IV) for the options
+print(calls[['strike', 'impliedVolatility']])
